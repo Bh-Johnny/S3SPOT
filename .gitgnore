@@ -1,0 +1,28 @@
+cat > .gitignore <<EOF
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.DS_Store
+
+# Data & Results
+dataset/
+results/
+logs/
+images/
+
+# Model checkpoints
+checkpoint/
+*.pth
+*.pt
+*.ckpt
+
+# IDE
+.idea/
+.vscode/
+
+# Others
+*.log
+*.tmp
+EOF
