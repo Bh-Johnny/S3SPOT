@@ -49,7 +49,7 @@ Before training or inference, you need to generate the **Reference Face** and th
 We use a GAN-based inversion method and a face parser to generate these files.
 
 ```bash
-python generate_reference.py \
+python ./reference_gen/scripts/reference_face_generate.py \
   --input_dir ./dataset/raw_images \
   --output_dir ./dataset/processed_data \
   --faceParser_name bisenet  # Example
@@ -68,7 +68,7 @@ We support two training modes as described in the paper.
 Train a general model on a dataset of paired images (Occluded + Reference).
 
 ```bash
-python train_general.py \
+python train_General_Training.py \
   --datapath ./dataset/processed_data \
   --bsz 3 \
   --lr 1e-4 \
@@ -81,7 +81,7 @@ python train_general.py \
 For challenging cases, you can fine-tune the model on a single image pair to achieve optimal results.
 
 ```bash
-python train_per_image.py \
+python train_One_Shot_Learning.py \
   --target_img ./dataset/processed_data/test_01.png \
   --ref_img ./dataset/processed_data/test_01_ref.png \
   --parsing_mask ./dataset/processed_data/test_01_parsing_mask.npy \
@@ -91,7 +91,7 @@ python train_per_image.py \
 Run inference using the trained adapter. This process uses the Greedy Matching Algorithm to automatically select prompts based on the contrast between the target and reference features.
 
 ```bash
-python inference.py \
+python inference_1_model.py \
   --datapath ./dataset/processed_data/val \
   --checkpoint ./checkpoint/train_general/model_epoch_50.pth \
   --output_dir ./results \
